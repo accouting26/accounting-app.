@@ -18,8 +18,8 @@ class Settings(BaseSettings):
     STRIPE_SECRET_KEY: Optional[str] = None
     STRIPE_WEBHOOK_SECRET: Optional[str] = None
     
-    # Stripe Price IDs (Mock values for development)
-    STRIPE_PRICE_PROFESSIONAL: str = "price_mock_prof"
+    # Stripe Price IDs
+    STRIPE_PRICE_PROFESSIONAL: str = "price_1Tajc5RxO2b0JlPWWoPPUv25"
     STRIPE_PRICE_BUSINESS: str = "price_mock_bus"
 
     class Config:

@@ -39,6 +39,9 @@ async def create_checkout_session(
             user.stripe_customer_id = customer_id
             db.commit()
 
+        # Determine base URL for success/cancel redirects
+        base_url = "https://accountingatyourservice.com" if not settings.MOCK_MODE else "http://localhost:3000"
+        
         checkout_session = stripe.checkout.Session.create(
             customer=customer_id,
             payment_method_types=['card'],
@@ -49,8 +52,8 @@ async def create_checkout_session(
                 },
             ],
             mode='subscription',
-            success_url=f"http://localhost:3000/dashboard?session_id={{CHECKOUT_SESSION_ID}}",
-            cancel_url=f"http://localhost:3000/pricing",
+            success_url=f"{base_url}/dashboard?session_id={{CHECKOUT_SESSION_ID}}",
+            cancel_url=f"{base_url}/pricing",
             metadata={
                 "user_id": user.id,
                 "plan": plan
